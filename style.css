@@ -1,0 +1,163 @@
+@font-face {
+  font-family: 'Baloo 2';
+  src: url('Baloo2.ttf') format('truetype');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Baloo 2', sans-serif;
+  background: radial-gradient(ellipse at 50% 20%, #23103f 0%, #150826 55%, #0c0417 100%);
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Campo de estrelas fixas, gerado com box-shadow */
+.estrelas {
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 10% 20%, #e9d5ff, transparent),
+    radial-gradient(1.5px 1.5px at 25% 65%, #c4b5fd, transparent),
+    radial-gradient(2px 2px at 40% 15%, #e9d5ff, transparent),
+    radial-gradient(1px 1px at 55% 80%, #c4b5fd, transparent),
+    radial-gradient(1.5px 1.5px at 70% 30%, #e9d5ff, transparent),
+    radial-gradient(1px 1px at 85% 60%, #c4b5fd, transparent),
+    radial-gradient(2px 2px at 90% 10%, #e9d5ff, transparent),
+    radial-gradient(1px 1px at 15% 90%, #c4b5fd, transparent),
+    radial-gradient(1.5px 1.5px at 60% 50%, #e9d5ff, transparent),
+    radial-gradient(1px 1px at 35% 40%, #c4b5fd, transparent);
+  z-index: 0;
+}
+
+.estrelas-cintilantes {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.estrelas-cintilantes span {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #f3e8ff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px 1px #d8b4fe;
+  animation: cintilar 3s ease-in-out infinite;
+}
+
+.estrelas-cintilantes span:nth-child(1) { top: 18%; left: 20%; animation-delay: 0s; }
+.estrelas-cintilantes span:nth-child(2) { top: 30%; left: 78%; animation-delay: 0.6s; }
+.estrelas-cintilantes span:nth-child(3) { top: 68%; left: 12%; animation-delay: 1.2s; }
+.estrelas-cintilantes span:nth-child(4) { top: 75%; left: 85%; animation-delay: 1.8s; }
+.estrelas-cintilantes span:nth-child(5) { top: 45%; left: 92%; animation-delay: 0.3s; }
+.estrelas-cintilantes span:nth-child(6) { top: 10%; left: 55%; animation-delay: 2.1s; }
+
+@keyframes cintilar {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.6); }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+}
+
+.planeta-svg {
+  width: 450px;
+  height: 450px;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  transform: scale(0.7);
+  animation: entrada 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s forwards;
+}
+
+@keyframes entrada {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.codigo {
+  font-size: 5.5rem;
+  font-weight: 800;
+  color: #f3e8ff;
+  line-height: 1;
+  text-shadow: 0 0 24px rgba(196, 181, 253, 0.6);
+}
+
+.mensagem {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #d8c5f0;
+  margin-top: 0.75rem;
+  margin-bottom: 2rem;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.botao {
+  display: inline-block;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #7c3aed;
+  padding: 0.75rem 2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.botao:hover {
+  background-color: #6d28d9;
+  transform: translateY(-2px);
+}
+
+.estrela-rastro {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, #c4b5fd 55%, transparent 100%);
+  box-shadow: 0 0 14px 4px rgba(196, 181, 253, 0.8);
+  z-index: 2;
+  --dx: 0px;
+  --dy: 0px;
+  animation: sumir 0.9s ease-out forwards;
+}
+
+@keyframes sumir {
+  from {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(0.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .planeta-svg,
+  .estrelas-cintilantes span {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
